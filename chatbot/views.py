@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 # Create your views here.
 load_dotenv()
-
+client = genai.Client()
 
 
 class HomeView(View):
@@ -16,17 +16,10 @@ class HomeView(View):
     def post(self, request):
         question = request.POST.get("question")
         if question:
-            response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=[
-        {"role": "system", "content": "You are a helpful assistant"},
-        {"role": "user", "content": question},
-        ],
-        stream=False
-    )
+            response = client.models.generate_content( model="gemini-2.5-flash", contents=question)
             return render(request , "chatbot/home.html" , {
                 "question":question,
-                "response": response.choices[0].message.content
+                "response": response.text
             })
         return HttpResponseRedirect(reverse_lazy("home"))
         
