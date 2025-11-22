@@ -8,9 +8,9 @@
     <h2 class="text-center mb-4">Ask ChatGPT</h2>
 
     <!-- Question Form -->
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mb-4">
       <div class="card-body">
-        <form method="post" >
+        <form method="post" action = "{% url "home" %}">
           {% csrf_token %}
 
           <div class="mb-3">
@@ -32,14 +32,30 @@
       </div>
     </div>
 
-    <!-- AI Response (only if present) -->
-    {% if response %}
-    <div class="card shadow-sm mt-4">
-      <div class="card-header">
-        <strong>Response</strong>
+    <!-- SHOW QUESTION + RESPONSE -->
+    {% if question and response %}
+    <div class="card shadow-sm">
+      <div class="card-header bg-dark text-white">
+        <strong>ChatGPT Result</strong>
       </div>
       <div class="card-body">
-        <pre class="mb-0" style="white-space: pre-wrap;">{{ response }}</pre>
+
+        <!-- Question -->
+        <div class="mb-3">
+          <h6 class="fw-bold">Your Question:</h6>
+          <div class="p-3 border rounded bg-light">
+            <pre class="mb-0" style="white-space: pre-wrap;">{{ question }}</pre>
+          </div>
+        </div>
+
+        <!-- Response -->
+        <div>
+          <h6 class="fw-bold">ChatGPT Response:</h6>
+          <div class="p-3 border rounded bg-white">
+            <pre class="mb-0" style="white-space: pre-wrap;">{{ response }}</pre>
+          </div>
+        </div>
+
       </div>
     </div>
     {% endif %}
@@ -48,5 +64,3 @@
 </div>
 
 {% endblock %}
-
-
