@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+
+    <h2 class="text-center mb-4">Ask ChatGPT</h2>
+
+    <!-- Question Form -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form method="post" >
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="question" class="form-label">Your Question</label>
+            <textarea
+              class="form-control"
+              id="question"
+              name="question"
+              rows="4"
+              placeholder="Type your question here..."
+              required
+            >{{ question|default:'' }}</textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">
+            Ask
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- AI Response (only if present) -->
+    {% if response %}
+    <div class="card shadow-sm mt-4">
+      <div class="card-header">
+        <strong>Response</strong>
+      </div>
+      <div class="card-body">
+        <pre class="mb-0" style="white-space: pre-wrap;">{{ response }}</pre>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
+
+
