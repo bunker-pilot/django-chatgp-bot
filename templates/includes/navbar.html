@@ -1,40 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="{% url "home" %}">ChatGPT Wrapper</a>
-  
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarContent"
-        aria-controls="navbarContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto">
-  
-          <!-- Example nav links -->
-          <li class="nav-item">
-            <a class="nav-link" href="/">Chat</a>
-          </li>
-  
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">About</a>
-          </li>
-  
-          <!-- Optional: Add login/logout later -->
-          <!--
-          <li class="nav-item">
-            <a class="nav-link" href="/login/">Login</a>
-          </li>
-          -->
-  
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+      <i class="bi bi-chat-dots-fill me-1"></i>
+      ChatGPT Wrapper
+    </a>
+
+    <!-- Mobile button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarMenu">
+
+      <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+
+        <!-- Example extra pages -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Docs</a>
+        </li>
+
+        <!-- Right-aligned button -->
+        <li class="nav-item ms-2">
+          <a class="btn btn-outline-light btn-sm" href="#">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+
+      </ul>
     </div>
-  </nav>
-  
+
+  </div>
+</nav>

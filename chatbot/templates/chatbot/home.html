@@ -1,66 +1,62 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-4">
   <div class="col-md-8">
 
-    <h2 class="text-center mb-4">Ask ChatGPT</h2>
-
-    <!-- Question Form -->
+    <!-- Chat window -->
     <div class="card shadow-sm mb-4">
-      <div class="card-body">
-        <form method="post" action = "{% url "home" %}">
+      <div class="card-header bg-primary text-white text-center py-3">
+        <h4 class="mb-0">ChatGPT Assistant</h4>
+      </div>
+
+      <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+        
+        <!-- Chat History -->
+        {% for item in chat %}
+          {% if item.question %}
+            <!-- User Bubble -->
+            <div class="d-flex justify-content-end mb-3">
+              <div class="p-3 rounded-3 bg-primary text-white shadow-sm" style="max-width: 75%;">
+                <strong>You:</strong>
+                <div class="mt-1" style="white-space: pre-wrap;">{{ item.question }}</div>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if item.response %}
+            <!-- AI Bubble -->
+            <div class="d-flex justify-content-start mb-3">
+              <div class="p-3 rounded-3 bg-light border shadow-sm" style="max-width: 75%;">
+                <strong>AI:</strong>
+                <div class="mt-1" style="white-space: pre-wrap;">{{ item.response }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+
+      <!-- Ask question form -->
+      <div class="card-footer bg-white border-top">
+        <form method="post" action="{% url 'home' %}">
           {% csrf_token %}
 
-          <div class="mb-3">
-            <label for="question" class="form-label">Your Question</label>
+          <div class="input-group">
             <textarea
               class="form-control"
-              id="question"
               name="question"
-              rows="4"
-              placeholder="Type your question here..."
+              rows="2"
               required
-            >{{ question|default:'' }}</textarea>
+              placeholder="Ask something..."
+            ></textarea>
+            <button class="btn btn-primary" type="submit">Send</button>
           </div>
 
-          <button type="submit" class="btn btn-primary w-100">
-            Ask
-          </button>
         </form>
       </div>
     </div>
 
-    <!-- SHOW QUESTION + RESPONSE -->
-    {% if question and response %}
-    <div class="card shadow-sm">
-      <div class="card-header bg-dark text-white">
-        <strong>ChatGPT Result</strong>
-      </div>
-      <div class="card-body">
-
-        <!-- Question -->
-        <div class="mb-3">
-          <h6 class="fw-bold">Your Question:</h6>
-          <div class="p-3 border rounded bg-light">
-            <pre class="mb-0" style="white-space: pre-wrap;">{{ question }}</pre>
-          </div>
-        </div>
-
-        <!-- Response -->
-        <div>
-          <h6 class="fw-bold">ChatGPT Response:</h6>
-          <div class="p-3 border rounded bg-white">
-            <pre class="mb-0" style="white-space: pre-wrap;">{{ response }}</pre>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    {% endif %}
-
   </div>
 </div>
-
 {% endblock %}
